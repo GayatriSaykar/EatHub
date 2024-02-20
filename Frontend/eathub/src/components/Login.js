@@ -1,10 +1,7 @@
 
 import React, { useReducer, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from "react-router-dom";
-
-
 
 const init = {
   username: { value: '', valid: false, touched: false, error: 'Username is required' },
@@ -17,19 +14,17 @@ const reducer = (state, action) => {
     case 'update':
       const { key, value, touched, valid, error, formValid } = action.data;
       return { ...state, [key]: { value, touched, valid, error }, formValid };
-    case 'reset':
-      return init;
+    case 'loginSuccess':
+      return state; // You can handle any state update needed for successful login
     default:
       return state;
   }
 };
 
-
-
 const Login = () => {
   const [login, dispatch] = useReducer(reducer, init);
-  let navigate = useNavigate();
-  const[insertMsg, setInsertMsg] = useState("")
+  const navigate = useNavigate();
+  
 
   const validateData = (key, val) => {
     let valid = true;
@@ -65,35 +60,60 @@ const Login = () => {
     dispatch({ type: 'update', data: { key, value, touched: true, valid, error, formValid } });
   };
 
-  
-
-  const submitData = (e) => {
+  const submitData = async (e) => {
     e.preventDefault();
 
-    // Add your server-side API call or form submission logic here
-    console.log(JSON.stringify(login));
-    const reqOptions={
-      method:"POST",
-      headers:{'content-type':'application/json'},
-      body:JSON.stringify({
-          username:login.username,
-          password:login.password
-      })
+    const reqOptions = {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        username:login.username.value,
+        password:login.password.value}),
+    };
+    console.log(reqOptions);
+
+        fetch('http://localhost:8080/checklogin', reqOptions)
+        .then(resp => {
+         if(resp.ok){
+          console.log("6666")
+          return resp.text();
+         }
+         else
+         {
+          return("Server error!!")
+         }
+    }).then(text => text.length ? JSON.parse(text) : {})
+    .then(obj => {
+        if (Object.keys(obj).length === 0) {
+            alert("wrong uid and password")
+        }
+        else {
+          // reduxaction(login(true))
+            localStorage.setItem("loggedstatus", 1)
+
+            // to keep info in key valye pair to use in session
+            localStorage.setItem("loggedinfo", JSON.stringify(obj))
+            console.log(JSON.stringify(obj));
+          if(obj.status===false){
+            alert("Request has not been approved");
+            navigate('/');
+          }
+            
+            else{
+                if (obj.role.role_id === 2) {
+                    navigate("/custhome")
+                }
+                else if (obj.role.role_id === 1) {
+                    navigate("/admin")
+                }
+                else if (obj.role.role_id === 3) {
+                    navigate("/vendor")
+                }
+              }
+        }
+    }).catch((error) => alert("server error try after some time"));
+  
   }
-
-fetch("http://localhost:8080/checkLogin",reqOptions)
-  .then(resp => resp.text())
-.then(data => {
-      if(data=="Login Successfully!!!"){
-          dispatch(login());
-          navigate('/custhome');
-      }else{
-          setInsertMsg(data);
-      }
-  })        
-
-
-  };
 
   return (
     <div className="container mt-5">
@@ -101,13 +121,15 @@ fetch("http://localhost:8080/checkLogin",reqOptions)
         <div className="col-md-6">
           <div className="card p-3 shadow">
             <h1 className="text-center mb-4">Login</h1>
-            <form>
+            <form onSubmit={submitData}>
               {/* Username */}
               <div className="mb-3">
                 <label className="form-label">Username:</label>
                 <input
                   type="text"
-                  className={`form-control form-control-sm ${login.username.touched && !login.username.valid ? 'is-invalid' : ''}`}
+                  className={`form-control form-control-sm ${
+                    login.username.touched && !login.username.valid ? 'is-invalid' : ''
+                  }`}
                   value={login.username.value}
                   onChange={(e) => handleChange('username', e.target.value)}
                   onBlur={(e) => handleChange('username', e.target.value)}
@@ -121,8 +143,10 @@ fetch("http://localhost:8080/checkLogin",reqOptions)
               <div className="mb-3">
                 <label className="form-label">Password:</label>
                 <div className="input-group">
-                  <input
-                    className={`form-control form-control-sm ${login.password.touched && !login.password.valid ? 'is-invalid' : ''}`}
+                  <input type='password'
+                    className={`form-control form-control-sm ${
+                      login.password.touched && !login.password.valid ? 'is-invalid' : ''
+                    }`}
                     value={login.password.value}
                     onChange={(e) => handleChange('password', e.target.value)}
                     onBlur={(e) => handleChange('password', e.target.value)}
@@ -135,19 +159,18 @@ fetch("http://localhost:8080/checkLogin",reqOptions)
 
               <button
                 type="submit"
-                className="btn btn-primary btn-sm"
+                className="btn btn-success btn-sm"
                 disabled={!login.formValid}
-                onClick={submitData}
               >
                 Login
               </button>
 
               <div className="mt-3">
                 <p className="mb-0">
-                  New Mess Vendor? <Link to="/mess-signup">Register here</Link>
+                  New Mess Vendor? <Link to="/messregister"  className="link-success">Register here</Link>
                 </p>
                 <p className="mb-0">
-                  New Customer? <Link to="/customer-signup">Register here</Link>
+                  New Customer? <Link to="/custregister"  className="link-success">Register here</Link>
                 </p>
               </div>
             </form>

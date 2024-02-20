@@ -1,65 +1,18 @@
-// Navbar.js
-
-// import React from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
-// const Navbar = () => {
-//   return (
-//     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-//       <div className="container">
-//         <div className="navbar-header">
-//           <a className="navbar-brand" href="/">
-//              EATHUB
-//           </a>
-//         </div>
-//         <button
-//           className="navbar-toggler"
-//           type="button"
-//           data-toggle="collapse"
-//           data-target="#navbarNav"
-//           aria-controls="navbarNav"
-//           aria-expanded="false"
-//           aria-label="Toggle navigation"
-//         >
-//           <span className="navbar-toggler-icon"></span>
-//         </button>
-//         <div className="collapse navbar-collapse" id="navbarNav">
-//           <ul className="navbar-nav ml-auto">
-//             <li className="nav-item active">
-//               <a className="nav-link" href="/">
-//                 Home <span className="sr-only">(current)</span>
-//               </a>
-//             </li>
-//             <li className="nav-item">
-//               <a className="nav-link" href="/about">
-//                 About
-//               </a>
-//             </li>
-//             <li className="nav-item">
-//               <a className="nav-link" href="/contact">
-//                 Contact
-//               </a>
-//             </li>
-//           </ul>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default Navbar;
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import Logo from '../images/Logo.jpeg';
+import bg from '../images/Cust1.jpeg';
 
 const Navbar = () => {
   return (
+    <div className='ro3'>
+      <div >
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         {/* Logo */}
         <Link to="/" className="navbar-brand">
-          <img src="/path/to/logo.png" alt="Logo" height="30" />
+         <h2 style={{color:'navy'}}>EatHub</h2>
         </Link>
 
         {/* Navbar Toggler for responsive design */}
@@ -80,13 +33,13 @@ const Navbar = () => {
           <ul className="navbar-nav ml-auto">
             {/* Signup Links */}
             <li className="nav-item">
-              <Link to="/customer-signup" className="nav-link">
-                Signup (Customer)
+              <Link to="/custregister" className="nav-link">
+                Customer
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/mess-signup" className="nav-link">
-                Signup (Mess)
+              <Link to="/messregister" className="nav-link">
+                Mess
               </Link>
             </li>
 
@@ -100,6 +53,33 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
+    <div style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          minHeight: '100vh', // Set the minimum height to full viewport height
+          color: 'white', // Set text color to white
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+        }}>
+          <h1 className="text-center">Welcome to EATHUB</h1>
+          <p style={{ fontSize: '20px' }}>Enjoy delicious moments with every bite.</p>
+
+    </div>
+    </div>
+    {/* <div>
+      <img src={Logo} alt='' />
+    </div> */}
+    <div>
+    <footer className="footer mt-5 py-3 bg-light" style={{ position: "fixed", bottom: 0, width: "100%" }}>
+        <div className="container text-center">
+          <h6 className='text-center'>&copy; 2024 EatHub. All Rights Reserved.</h6>
+        </div>
+      </footer>
+    </div>
+    </div>
   );
 };
 
