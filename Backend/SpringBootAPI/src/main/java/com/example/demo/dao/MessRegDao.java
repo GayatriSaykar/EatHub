@@ -15,10 +15,13 @@ public class MessRegDao {
 	String mess_name;
 	String owner_name;
 	String mess_address;
+	String area ;
 	String city;
 	String contactno;
 	String email;
 	int login_id;
 	String username;
 	String password;
+	boolean status;
+	
 }

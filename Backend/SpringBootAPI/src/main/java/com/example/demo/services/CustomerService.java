@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +27,12 @@ public class CustomerService {
 	@Autowired
 	LoginRepository lr ;
 
-	public Customer register(CustomerRegDao cd)
+	public Customer custRegister(CustomerRegDao cd)
 	{
 		Role ro = rs.getRole(2);
-
-		Login lg = new Login(cd.getUsername(), cd.getPassword(), ro);
+        
+		
+		Login lg = new Login(cd.getUsername(), cd.getPassword(), ro , true);
 		lr.save(lg);
 
 		Customer custom = new Customer(cd.getCust_name(), cd.getCust_address(), cd.getContactno(), cd.getEmail(),
@@ -37,4 +40,15 @@ public class CustomerService {
 
 		return custrepo.save(custom);
 	}
+	
+	
+	public Customer getCustomer(Login l )
+	{
+		return custrepo.getCustomer(l);
+	}
+	
+	
+	public List<Customer> getAllCustomers() {
+        return custrepo.findAll();
+    }
 }

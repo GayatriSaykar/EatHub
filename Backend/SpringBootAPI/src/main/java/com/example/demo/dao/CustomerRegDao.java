@@ -11,16 +11,13 @@ import lombok.Setter;
 @AllArgsConstructor
 
 public class CustomerRegDao {
-
-
+    
+	int cust_id ;        // newly added for updation trial
 	String cust_name;
 	String cust_address;
 	String contactno;
 	String email;
 	String gender;
-	int login_id;
-	String username ;
-	String password ;
-	
-
+	String username;
+	String password;
 }
