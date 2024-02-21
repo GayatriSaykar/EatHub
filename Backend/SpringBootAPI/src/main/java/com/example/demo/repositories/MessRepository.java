@@ -1,6 +1,7 @@
 package com.example.demo.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,9 @@ public interface MessRepository extends JpaRepository<Mess,Integer>  {
 	
 	 @Query("select m from Mess m where m.logins = :log ")
 		public Mess getMess(Login log );
+	 
+//	 Optional<Mess> findByMessIdAndDeletedFalse(int mess_id);
+	 
 
 }
 

@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,7 +47,7 @@ public class MessService {
         return messrepo.findAll();
     }
 
-    public List<Mess> getMessByCity(String area) {
+    public List<Mess> getMessByArea(String area) {
         return messrepo.findByArea(area);
     }
     
@@ -55,6 +56,17 @@ public class MessService {
 		return messrepo.getMess(log);
   }
 	
+	
+	public void deleteMess(int mess_id) {
+        messrepo.deleteById(mess_id);
+    }
+//	 public void softDeleteMess(int mess_id) {
+//	        Optional<Mess> optionalMess = messrepo.findByMessIdAndDeletedFalse(mess_id);
+//	        optionalMess.ifPresent(mess -> {
+//	            mess.setDeleted(true);
+//	            messrepo.save(mess);
+//	        });
+//	    }
 
 }
 

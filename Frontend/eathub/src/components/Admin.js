@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import LogoutForm from './LogoutForm';
 const Admin = () => {
   const [mess, setMess] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     // Fetch mess from the API
@@ -10,7 +11,7 @@ const Admin = () => {
       .then(response => response.json())
       .then(data => setMess(data))
       .catch(error => console.error('Error fetching mess', error));
-  }, []);
+  }, [refresh]);
 
   const handleApprove = (mess_id) => {
     // Handle login approval
@@ -58,6 +59,36 @@ const Admin = () => {
       return messItem;
     }));
   };
+
+  const DeleteData = (mess_id) => {
+    console.log('Deleting mess with ID:', mess_id);
+  
+    fetch(`http://localhost:8080/MessDelete/${mess_id}`, {
+      method: 'PUT', // Use PUT instead of DELETE
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ deleted: true }), // Update the status to indicate soft delete
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log('Mess soft deleted successfully!');
+          setRefresh(prevRefresh => !prevRefresh);
+          // Optionally update the state or perform any other actions
+          removeMess(mess_id);
+        } else {
+          console.error('Error soft deleting mess:', response.statusText);
+        }
+      })
+      .catch(error => console.error('Error soft deleting mess:', error));
+  };
+  
+
+  
+  const removeMess = (mess_id) => {
+    setMess(prevMess => prevMess.filter(messItem => messItem.login_id.login_id !== mess_id));
+  };
+
   return (
     <div>
       {/* Navbar */}
@@ -69,12 +100,6 @@ const Admin = () => {
           </button>
           <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link" href="#">Profile</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Statistics</a>
-              </li>
               <li className="nav-item">
                 <LogoutForm/>
               </li>
@@ -96,6 +121,7 @@ const Admin = () => {
               <th scope="col">Contact No</th>
               <th scope="col">Status</th>
               <th scope="col">Actions</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -112,6 +138,9 @@ const Admin = () => {
                 <td>
                   <button className="btn btn-success" onClick={() => handleApprove(mess.login_id.login_id)}>Accept</button>
                   <button className="btn btn-danger ms-2" onClick={() => handleReject(mess.login_id.login_id)}>Reject</button>
+                </td>
+                <td>
+                <button className="btn btn-primary ms-2" onClick={() => DeleteData(mess.mess_id)}>Delete</button>
                 </td>
               </tr>
             ))}

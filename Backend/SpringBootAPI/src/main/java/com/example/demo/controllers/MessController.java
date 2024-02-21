@@ -3,10 +3,13 @@ package com.example.demo.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,14 +38,26 @@ public class MessController {
     }
 
 	@GetMapping("/byArea/{area}")
-    public List<Mess> getMessByCity(@PathVariable("city")String area) {
+    public List<Mess> getMessByArea(@PathVariable("area")String area) {
         try {
-            return mservice.getMessByCity(area);
+            return mservice.getMessByArea(area);
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception
             throw new RuntimeException("Error processing request");
         }
     }
+	
+	 @PutMapping("/MessDelete/{mess_id}")
+	    public ResponseEntity<String> deleteMess(@PathVariable("mess_id") int mess_id) {
+	        mservice.deleteMess(mess_id);
+	        return ResponseEntity.ok("Mess deleted successfully");
+	    }
+	
+//	  @PutMapping("/MessDelete/{mess_id}")
+//	    public ResponseEntity<String> softDeleteMess(@PathVariable("mess_id") int mess_id) {
+//	        mservice.softDeleteMess(mess_id);
+//	        return ResponseEntity.ok("Mess soft deleted successfully");
+//	    }
 }
 
 
