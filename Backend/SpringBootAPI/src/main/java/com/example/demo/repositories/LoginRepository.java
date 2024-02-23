@@ -13,11 +13,9 @@ import com.example.demo.entities.Login;
 import jakarta.transaction.Transactional;
 @Repository
 @Transactional
-public interface LoginRepository extends JpaRepository<Login, Integer> 
-{
+public interface LoginRepository extends JpaRepository<Login, Integer> {
 	//add login and write query to match username and password
-	
-	@Query("Select l from Login l where l.username = :username and l.password = :password")
+	@Query("Select l from Login l where l.username = :username and l.password= :password")
 	public Optional<Login> LoginDetail(@Param("username") String username, @Param("password") String password);
 	
 	
@@ -29,10 +27,5 @@ public interface LoginRepository extends JpaRepository<Login, Integer>
 	@Modifying
 	@Query(value = "update mess set status = 0 where login_id = :id ",nativeQuery = true )
 	public int rejectMess(int id );
-	
-
-	//	@Query(value = "select * from login where username like :uname",nativeQuery = true)  -- mahesh
-//	public Login getUserByUsername(String username);
-	
 	
 }

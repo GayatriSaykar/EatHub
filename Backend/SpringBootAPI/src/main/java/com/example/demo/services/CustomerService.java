@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,10 @@ public class CustomerService {
 		return custrepo.save(custom);
 	}
 	
+	public Customer getCustomer(int log) {
+		Optional<Customer> c = custrepo.findById(log);
+		return c.get();
+	}
 	
 	public Customer getCustomer(Login l )
 	{

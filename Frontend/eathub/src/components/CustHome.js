@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import image from '../images/Cust1.jpeg';
+import image from '../image/Cust1.jpg';
 import LogoutForm from './LogoutForm';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ const CustHome = () => {
     setObj(parsedInfo);
 
     // Fetch mess data from your API endpoint
-    fetch('http://localhost:8080/getallmess')
+    fetch('http://localhost:8080/all')
       .then((response) => response.json())
       .then((data) => setMessList(data))
       .catch((error) => console.error('Error fetching mess data:', error));
@@ -118,4 +118,82 @@ const CustHome = () => {
 
 export default CustHome;
 
+
+
+
+// // Import necessary modules from react-router-dom
+// import { Link} from 'react-router-dom';
+// import React, { useState, useEffect } from 'react';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
+// // MessDetails component to display detailed mess information
+// const MessDetails = ({ match, messes }) => {
+//   const messId = parseInt(match.params.id);
+//   const mess = messes.find(mess => mess.id === messId);
+
+//   if (!mess) {
+//     return <div>Mess not found</div>;
+//   }
+
+//   return (
+//     <div>
+//       <h2>Mess Details</h2>
+//       <p>Mess Name: {mess.mess_name}</p>
+//       <p>Area: {mess.area}</p>
+//       <p>Contact No: {mess.contactno}</p>
+//       <p>Address: {mess.mess_address}</p>
+//       {/* Add more mess details as needed */}
+//       <Link to="/">Back to Mess List</Link>
+//     </div>
+//   );
+// };
+
+// const CustHome = () => {
+//   const [messes, setMesses] = useState([]);
+
+//   useEffect(() => {
+//     // Fetch messes from the API
+//     fetch('http://localhost:8080/all')
+//       .then(response => response.json())
+//       .then(data => setMesses(data))
+//       .catch(error => console.error('Error fetching messes', error));
+//   }, []);
+
+//   return (
+   
+//       <div>
+//         {/* Navigation Bar */}
+//         <nav className="navbar navbar-expand-lg navbar-light bg-light">
+//           {/* ... (unchanged) */}
+//         </nav>
+
+//         {/* Main Content */}
+//         <div className="container mt-3">
+//           <h1 className="mb-4">Customer Homepage</h1>
+//           <div className="list-group">
+//             {messes.map(mess => (
+//               <Link
+//                 key={mess.id}
+//                 to={`/mess/${mess.id}`}
+//                 className="list-group-item list-group-item-action"
+//               >
+//                 <div className="d-flex w-100 justify-content-between">
+//                   <h5 className="mb-1">Mess Name: {mess.mess_name}</h5>
+//                   <small>Area: {mess.area}</small>
+//                 </div>
+//                 <p className="mb-1">Contact No: {mess.contactno}</p>
+//                 <p className="mb-1">Address: {mess.mess_address}</p>
+//                 {/* Add more mess details as needed */}
+//               </Link>
+//             ))}
+//           </div>
+
+//           {/* Define the route for MessDetails component */}
+//         </div>
+//       </div>
+  
+//   );
+// };
+
+// export default CustHome;
 

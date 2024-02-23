@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class MessRegDao {
 
 	String mess_name;
@@ -22,6 +21,5 @@ public class MessRegDao {
 	int login_id;
 	String username;
 	String password;
-	boolean status;
-	
+	Boolean status;
 }

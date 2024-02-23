@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,10 +26,10 @@ public class Login {
 	String password;
 
 	@JsonIgnoreProperties("role")
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "role_id")
 	Role role;
-
+	
 	@Column
 	boolean status;
 
@@ -37,7 +37,8 @@ public class Login {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	
 	public Login(int login_id, String username, String password, Role role, boolean status) {
 		super();
 		this.login_id = login_id;
@@ -53,6 +54,14 @@ public class Login {
 		this.role = ro;
 		this.status = status;
 
+	}
+
+	public Role getRole_id() {
+		return role;
+	}
+
+	public void setRole_id(Role role_id) {
+		this.role = role_id;
 	}
 
 	public int getLogin_id() {
@@ -78,15 +87,6 @@ public class Login {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
 	public boolean isStatus() {
 		return status;
 	}
@@ -94,5 +94,4 @@ public class Login {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-
 }

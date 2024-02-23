@@ -9,9 +9,6 @@ import com.example.demo.entities.Login;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
-
 	@Query("select c from Customer c where c.logins = :l")
 	public Customer getCustomer(Login l);
-	
-
 }

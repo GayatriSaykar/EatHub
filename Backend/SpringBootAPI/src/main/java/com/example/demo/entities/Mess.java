@@ -12,43 +12,43 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "mess")
+@Table(name="mess")
 
-public class Mess {
-
+public class Mess{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int mess_id;
-
+	
 	@Column
 	String mess_name;
-
+	
 	@Column
 	String owner_name;
-
+	
 	@Column
 	String mess_address;
-
+	
 	@Column
 	String area;
-
-
+	
 	@Column
 	String city;
-
+	
 	@Column
 	String contactno;
-
+	
 	@Column
 	String email;
-	
-//	 @Column(name = "deleted", columnDefinition = "boolean default false")
-//	    private boolean deleted = false;
-
+	 
 	@JsonIgnoreProperties("logins")
 	@OneToOne
 	@JoinColumn(name = "login_id")
-	Login logins;
+	Login logins  ;
+
+	
+	
+	
 
 	public Mess() {
 		super();
@@ -83,11 +83,11 @@ public class Mess {
 
 	}
 
+	
+
 	public int getMess_id() {
 		return mess_id;
 	}
-
-	
 
 	public void setMess_id(int mess_id) {
 		this.mess_id = mess_id;
@@ -116,14 +116,6 @@ public class Mess {
 	public void setMess_address(String mess_address) {
 		this.mess_address = mess_address;
 	}
-	
-	public String getArea() {
-		return area;
-	}
-
-	public void setArea(String area) {
-		this.area = area;
-	}
 
 	public String getCity() {
 		return city;
@@ -148,12 +140,20 @@ public class Mess {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	public Login getLogin_id() {
-		return logins;
+	return logins ;
+    }
+
+    public void setLogin_id(Login login_id) {
+	this.logins = logins;
+ }
+    
+    public String getArea() {
+		return area;
 	}
 
-	public void setLogin_id(Login login_id) {
-		this.logins = logins;
+	public void setArea(String area) {
+		this.area = area;
 	}
 }

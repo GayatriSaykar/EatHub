@@ -13,30 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dao.LoginDao;
 import com.example.demo.entities.Login;
-
 import com.example.demo.services.LoginService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class LoginController {
 
+	
 	@Autowired
 	LoginService logservice;
 
-//	@PostMapping("/checklogin")
-//	public Login checkLogin(@RequestBody LoginDao ld) {
-//		try {
-//			System.out.print(ld);
-//			return lservice.checkLogin(ld.getUsername(), ld.getPassword());
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
-
-//	----------------------------------------------------------------------------
-
-	@PostMapping("/checklogin")
+	@PostMapping("/checkLogin")
 	public ResponseEntity<Login> checkLogin(@RequestBody LoginDao ld)
 	{
 
@@ -46,7 +33,7 @@ public class LoginController {
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
-
+	
 	@PostMapping("/login")
 	public ResponseEntity<String> registerLogin(@RequestBody Login loginData) {
 		try {
@@ -73,13 +60,6 @@ public class LoginController {
 		this.logservice = loginService;
 	}
 	
-//	@GetMapping("/approve")
-//	public int approveMess(@RequestParam("login_id") int login_id )
-//	{
-//		return logservice.ApproveMess();
-//	}
-
-
 	@PutMapping("/approve/{login_id}")
 	public ResponseEntity<Void> approveLogin(@PathVariable("login_id") int login_id) 
 	{
@@ -94,65 +74,5 @@ public class LoginController {
 		return ResponseEntity.ok().build();
 	}
 }
-	
-// ---------------------------------------------------------------------------------------
 
 
-//	@PostMapping("/checkLogin")                              --->>> Mahesh 
-//    public Login checkLogin(@RequestBody LoginDao lr)
-//    {
-//		//System.out.println("lr"+lr);
-//    	
-//    	
-//    	//System.out.println(lr.getUname());
-//    	Login L=lservice.getLoginByUsername(lr.getUname());
-//    	
-//    	System.out.println(L.getRole().getRole_id());
-//    	if(L.getRole().getRole_id()==1)
-//    	{
-//    		return L;
-//    	}
-//    	else if(L.getRole().getRole_id()==2)
-//    	{
-//    		
-//    	}
-//    	else if(L.getRole().getRole_id()==3)
-//    	{
-//    		
-//    	}
-//    	//System.out.println("lgid"+L.getLoginid());
-//    	
-//    	//return L;
-////    	if(L.getPassword().equals(lr.getPass()))
-////    	{
-////    		//return Role id of that user
-////    		Role r = L.getRole();
-////    		//System.out.println();
-////    		//Condition for service provider whos request still not accepted
-////    		
-////    		
-//////    		if(r.getRole_id()== 2)
-//////    		{
-//////    			ServiceProvider sp = spservice.getUserByLoginId(L);
-//////    			System.out.println("sp "+sp);
-//////    			
-//////    		}
-////    		if(r.getRole_id()== 2)
-////    		{
-////    			ServiceProvider sp = spservice.getUserByLoginId(L);
-////    			System.out.println("sp "+sp);
-////
-////    			
-////    		}
-////    		return r.getRole_id();
-//       	//}
-////    	else
-////    	{
-////    		return -1;
-////    		//return "Invalid Credentials";
-////    	}
-//    	
-//    	//User logged=uservice.getUserByLoginId(u.getLoginid());
-//    	//return logged;
-//    	return L; 
-//    }

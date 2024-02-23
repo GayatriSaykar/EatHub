@@ -12,13 +12,11 @@ import lombok.Setter;
 
 public class LoginDao {
 
-	String username;
+	String username ;
 	String password;
 	Boolean status ;
 	@Override
 	public String toString() {
 		return "LoginDao [username=" + username + ", password=" + password + ", status=" + status + "]";
 	}
-
-	
 }

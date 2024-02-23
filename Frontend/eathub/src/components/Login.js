@@ -32,12 +32,12 @@ const Login = () => {
 
     switch (key) {
       case 'username':
-        valid = val !== null && /^[0-9A-Za-z]{6,16}$/.test(val.trim());
-        error = 'Username should contain at least 6 chars and digit or chars';
+        valid = val !== null && /^[a-zA-Z0-9_]+$/.test(val.trim());
+        error = 'Username must be required and contain only letters, digits, and underscores';
         break;
       case 'password':
-        valid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{5,}$/.test(val);
-        error = 'Password should contain at least 5 long & lowercase uppercase digit';
+        valid = val.length >= 8 && val.length <= 15 && /[\W_]/.test(val);
+        error = 'Password must be between 8 and 15 characters and contain at least one special character';
         break;
       default:
         break;
@@ -72,10 +72,9 @@ const Login = () => {
     };
     console.log(reqOptions);
 
-        fetch('http://localhost:8080/checklogin', reqOptions)
-        .then(resp => {
+        fetch('http://localhost:8080/checkLogin', reqOptions).then(resp => {
          if(resp.ok){
-          //console.log("6666")
+
           return resp.text();
          }
          else
@@ -96,22 +95,27 @@ const Login = () => {
             console.log(JSON.stringify(obj));
           if(obj.status===false){
             alert("Request has not been approved");
-            navigate('/login');
+            navigate('/');
           }
+          
             
             else{
-                if (obj.role.role_id === 2) {
+              localStorage.setItem("user",JSON.stringify(obj))
+                if (obj.role_id.role_id === 2) {
                     navigate("/custhome")
                 }
-                else if (obj.role.role_id === 1) {
+                else if (obj.role_id.role_id === 1) {
                     navigate("/admin")
                 }
-                else if (obj.role.role_id === 3) {
+                else if (obj.role_id.role_id === 3) {
                     navigate("/vendor")
                 }
               }
         }
-    }).catch((error) => alert("server error try after some time"));
+    }).catch((error) => {
+      console.error('API Error:', error);
+      alert("server error, try after some time");
+  });
   
   }
 
@@ -122,6 +126,7 @@ const Login = () => {
           <div className="card p-3 shadow">
             <h1 className="text-center mb-4">Login</h1>
             <form onSubmit={submitData}>
+              {/* Username */}
               <div className="mb-3">
                 <label className="form-label">Username:</label>
                 <input
@@ -138,6 +143,7 @@ const Login = () => {
                 )}
               </div>
 
+              {/* Password */}
               <div className="mb-3">
                 <label className="form-label">Password:</label>
                 <div className="input-group">
@@ -165,10 +171,10 @@ const Login = () => {
 
               <div className="mt-3">
                 <p className="mb-0">
-                  New Mess Vendor? <Link to="/messregister"  className="link-success">Register here</Link>
+                  New Mess Vendor? <Link to="/mess-signup"  className="link-success">Register here</Link>
                 </p>
                 <p className="mb-0">
-                  New Customer? <Link to="/custregister"  className="link-success">Register here</Link>
+                  New Customer? <Link to="/customer-signup"  className="link-success">Register here</Link>
                 </p>
               </div>
             </form>
