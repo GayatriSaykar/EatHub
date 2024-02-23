@@ -60,13 +60,17 @@ public class MessService {
 	public void deleteMess(int mess_id) {
         messrepo.deleteById(mess_id);
     }
-//	 public void softDeleteMess(int mess_id) {
-//	        Optional<Mess> optionalMess = messrepo.findByMessIdAndDeletedFalse(mess_id);
-//	        optionalMess.ifPresent(mess -> {
-//	            mess.setDeleted(true);
-//	            messrepo.save(mess);
-//	        });
-//	    }
+
+//	public void softDelete(int mess_id) {
+//        Optional<Mess> optionalEntity = messrepo.findById(mess_id);
+//        if (optionalEntity.isPresent()) {
+//            Mess entity = optionalEntity.get();
+//            entity.setDeleted(true);
+//            messrepo.save(entity);
+//        } else {
+//            // Handle not found scenario
+//        }
+//    }
 
 }
 

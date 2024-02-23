@@ -80,7 +80,7 @@ const reducer = (state, action) => {
         if(!cust_namePattern.test(val))
         {
            valid = false;
-           error = "invalid name"
+           error = "Customer name should be firstname and lastname"
         }
         break;
       case "email":
@@ -88,7 +88,7 @@ const reducer = (state, action) => {
         if(!emailPattern.test(val))
         {
            valid = false;
-           error = "invalid email"
+           error = "Email should contain special character and dot(.)"
         }
         break;
       case "contactno":
@@ -96,23 +96,16 @@ const reducer = (state, action) => {
         if(!contactnoPattern.test(val))
         {
            valid = false;
-           error = "invalid contact"
+           error = "Contact should contain 10 digits only"
         }
         break;
-
-        // case "gender":
-        //   if (!val) {
-        //     valid = false;
-        //     error = "Please select a gender";
-        //   }
-        //   break;
 
       case "cust_address":
         const cust_addPattern = /^[0-9A-Za-z\s.,'-]+$/;
         if(!cust_addPattern.test(val))
         {
            valid = false;
-           error = "invalid address"
+           error = "Address should be required"
         }
         break;
       case "username":
@@ -120,15 +113,15 @@ const reducer = (state, action) => {
         if(!usernamepattern.test(val))
         {
            valid = false;
-           error = "invalid username"
+           error = "Username contains letters and digits and at least 6 char"
         }
         break;
       case "password":
-        const passwordpattern =/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,15}$/;
+        const passwordpattern =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
           if(!passwordpattern.test(val))
           {
              valid = false;
-             error = "invalid password"
+             error = "Password should contain min 5 char,uppercase,lowercase,digit"
           }
         break;
       default:
@@ -180,7 +173,7 @@ const reducer = (state, action) => {
       .then((response) => {
         if (response.ok) {
           // Successful registration
-          alert("Customer registered successfully!");
+          //alert("Customer registered successfully!");
           dispatch({ type: "reset" }); // Reset the form after successful registration
 
           // Navigate to the login page
@@ -195,6 +188,7 @@ const reducer = (state, action) => {
       })
       .catch((error) => {
         console.error("Error during registration:", error);
+        navigate("/custregister");
         //alert("An error occurred during registration. Please try again.");
       });
   };

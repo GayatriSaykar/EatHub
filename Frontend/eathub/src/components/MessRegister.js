@@ -1,5 +1,5 @@
 import { useState,useReducer } from "react";
-import Image from "../images/image2.jpg";
+// import Image from "../images/image2.jpg";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
@@ -57,7 +57,7 @@ const reducer=(state,action)=>{
             if(!mess_namePattern.test(val))
             {
                valid = false;
-               error = "invalid mess name"
+               error = "Please enter a valid mess name"
             }
             break;
          
@@ -66,7 +66,7 @@ const reducer=(state,action)=>{
               if(!owner_namePattern.test(val))
               {
                  valid = false;
-                 error = "invalid owner name"
+                 error = "owner name should be firstname and lastname"
               }
               break;
             case 'email':
@@ -74,7 +74,7 @@ const reducer=(state,action)=>{
               if(!emailPattern.test(val))
               {
                  valid = false;
-                 error = "invalid email id"
+                 error = "Email should contain special character and dot(.)"
               }
               break;
           case 'contactno':
@@ -82,7 +82,7 @@ const reducer=(state,action)=>{
             if(!contactnoPattern.test(val))
             {
                valid = false;
-               error = "invalid contactno"
+               error = "Please enter a 10-digit numeric contact number."
             }
             break;
          
@@ -93,7 +93,7 @@ const reducer=(state,action)=>{
               if(!mess_addPattern.test(val))
               {
                  valid = false;
-                 error = "invalid mess address"
+                 error = "Please enter a valid address"
               }
               break;
           case 'username':
@@ -101,15 +101,15 @@ const reducer=(state,action)=>{
             if(!usernamepattern.test(val))
             {
                valid = false;
-               error = "invalid username"
+               error = "Username contains letters and digits and at least 6 char"
             }
             break;
           case 'password':
-            var passwordpattern =/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,15}$/ ;
+            var passwordpattern =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{5,}$/ ;
             if(!passwordpattern.test(val))
             {
                valid = false;
-               error = "invalid password"
+               error = "Password should contain at least at least 5 long"
             }
             break;
           default:
@@ -170,20 +170,25 @@ const reducer=(state,action)=>{
         .then((response) => {
           if (response.ok) {
             // Successful login
-            alert('Registration successful!');
+          //  alert('Registration successful!');
     
             // Redirect or perform other actions on successful login
             navigate("/login");
           } else {
+            navigate("/messregister");
             // Login failed
-            alert('Registration Fail!! Please Try Again');
+          //  alert('Registration Fail!! Please Try Again');
           }
         })  
   
       }
 
+      const onSubmit = (mess_id) => {
+        navigate(`/messdetail/${mess_id}`);
+      };
+//style={{backgroundRepeat:"no-repeat" , backgroundImage: `url(${Image})`  }}
     return(
-        <div className="container mt-5 img-fluid shadow-4 " style={{backgroundRepeat:"no-repeat" , backgroundImage: `url(${Image})`  }}>
+        <div className="container mt-5 img-fluid shadow-4 " style={{backgroundColor:"MediumSeaGreen"}} >
         <div className="row justify-content-center " >
             <div className="col-md-4 shadow-lg p-3 mb-5 bg-white rounded">
             <form>
@@ -333,6 +338,12 @@ const reducer=(state,action)=>{
             <div className="d-grid">
             <button type="submit" className="btn btn-success" disabled={!isFormValid()} onClick={submitData}>Save</button>
             </div>
+            {/* <div className="d-grid"><button
+                  className="btn btn-success"
+                  onClick={() => onSubmit(mess.mess_id)}
+                >
+                  Pay Now
+                </button></div> */}
             <div className="mt-3">
                 <p className="mb-0">
                   Already Registered? <Link to="/login"  className="link-success">Login</Link>

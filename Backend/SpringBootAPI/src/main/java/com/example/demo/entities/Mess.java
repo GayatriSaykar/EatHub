@@ -32,13 +32,6 @@ public class Mess {
 	@Column
 	String area;
 
-//	public Boolean getDeleted() {
-//		return deleted;
-//	}
-//
-//	public void setDeleted(Boolean deleted) {
-//		this.deleted = deleted;
-//	}
 
 	@Column
 	String city;
@@ -49,8 +42,8 @@ public class Mess {
 	@Column
 	String email;
 	
-//	@Column(name = "deleted")
-//	Boolean deleted;
+//	 @Column(name = "deleted", columnDefinition = "boolean default false")
+//	    private boolean deleted = false;
 
 	@JsonIgnoreProperties("logins")
 	@OneToOne

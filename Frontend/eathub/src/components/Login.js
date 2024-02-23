@@ -32,12 +32,12 @@ const Login = () => {
 
     switch (key) {
       case 'username':
-        valid = val !== null && /^[a-zA-Z0-9_]+$/.test(val.trim());
-        error = 'Username must be required and contain only letters, digits, and underscores';
+        valid = val !== null && /^[0-9A-Za-z]{6,16}$/.test(val.trim());
+        error = 'Username should contain at least 6 chars and digit or chars';
         break;
       case 'password':
-        valid = val.length >= 8 && val.length <= 15 && /[\W_]/.test(val);
-        error = 'Password must be between 8 and 15 characters and contain at least one special character';
+        valid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{5,}$/.test(val);
+        error = 'Password should contain at least 5 long & lowercase uppercase digit';
         break;
       default:
         break;
@@ -75,7 +75,7 @@ const Login = () => {
         fetch('http://localhost:8080/checklogin', reqOptions)
         .then(resp => {
          if(resp.ok){
-          console.log("6666")
+          //console.log("6666")
           return resp.text();
          }
          else
@@ -122,7 +122,6 @@ const Login = () => {
           <div className="card p-3 shadow">
             <h1 className="text-center mb-4">Login</h1>
             <form onSubmit={submitData}>
-              {/* Username */}
               <div className="mb-3">
                 <label className="form-label">Username:</label>
                 <input
@@ -139,7 +138,6 @@ const Login = () => {
                 )}
               </div>
 
-              {/* Password */}
               <div className="mb-3">
                 <label className="form-label">Password:</label>
                 <div className="input-group">

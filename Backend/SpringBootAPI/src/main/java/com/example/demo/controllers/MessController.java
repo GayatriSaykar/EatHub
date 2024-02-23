@@ -53,11 +53,11 @@ public class MessController {
 	        return ResponseEntity.ok("Mess deleted successfully");
 	    }
 	
-//	  @PutMapping("/MessDelete/{mess_id}")
-//	    public ResponseEntity<String> softDeleteMess(@PathVariable("mess_id") int mess_id) {
-//	        mservice.softDeleteMess(mess_id);
-//	        return ResponseEntity.ok("Mess soft deleted successfully");
-//	    }
+//	@DeleteMapping("/{mess_id}")
+//    public void softDeleteEntity(@PathVariable int mess_id) {
+//        mservice.softDelete(mess_id);
+//    }
+
 }
 
 

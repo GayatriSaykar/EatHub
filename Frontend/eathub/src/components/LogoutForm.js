@@ -12,7 +12,7 @@ export default function LogoutForm() {
     dispatch(logout());
 
     // After the logout action is dispatched, navigate to the "/login" route
-    navigate("/");
+    navigate("/login");
   };
 
   return (

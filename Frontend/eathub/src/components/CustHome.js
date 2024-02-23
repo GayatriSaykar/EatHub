@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const CustHome = () => {
   const [messList, setMessList] = useState([]);
   const [filteredMessList, setFilteredMessList] = useState([]);
-  const [areaList, setAreaList] = useState([]);
+  //const [areaList, setAreaList] = useState([]);
   const [selectedArea, setSelectedArea] = useState('');
   const [obj,setObj]=useState(null);
   const navigate = useNavigate();
@@ -25,23 +25,23 @@ const CustHome = () => {
       .catch((error) => console.error('Error fetching mess data:', error));
   }, []);
 
-    useEffect(() => {
-      const term = selectedArea.toLowerCase();
-      const filteredMessList = messList.filter((mess) =>
-        mess.area && mess.area.toLowerCase().includes(term)
-      );
-      setFilteredMessList(filteredMessList);
-    
-      alert(`http://localhost:8080/byArea/${selectedArea}`);
-      fetch(`http://localhost:8080/byArea/${selectedArea}`)
-        .then((response) => response.json())
-        .then((data) => setAreaList(data))
-        .catch((error) => console.error('Error fetching city data:', error));
-    }, [selectedArea, messList]);
+   
     
 
   const handleSearch = (e) => {
-    setSelectedArea(e.target.value);
+    // const term = selectedArea.toLowerCase();
+    // const filteredMessList = messList.filter((mess) =>
+    //   mess.area && mess.area.toLowerCase().includes(term)
+    // );
+    // setFilteredMessList(filteredMessList);
+    setSelectedArea(e.target.value)
+    console.log(selectedArea)
+  
+   // alert(`http://localhost:8080/byArea/${selectedArea}`);
+    fetch(`http://localhost:8080/byArea/${selectedArea}`)
+      .then((response) => response.json())
+      .then((data) => setMessList(data))
+      .catch((error) => console.error('Error fetching city data:', error));
   };
 
   // const handleSearch = (e) => {
@@ -55,12 +55,12 @@ const CustHome = () => {
   // };
 
   const onSubmit = (mess_id) => {
-    navigate(`/messdetail/${mess_id}`);
+    navigate(`/custplan/${mess_id}`);
   };
 
 
   return (
-    <div>
+    <div className="container-fluid">
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
           <a className="navbar-brand" href="#"> <h5>Welcome {obj?.username}</h5></a>

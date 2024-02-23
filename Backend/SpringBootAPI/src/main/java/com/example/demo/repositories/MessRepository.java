@@ -14,13 +14,13 @@ import com.example.demo.entities.Mess;
 @Repository
 public interface MessRepository extends JpaRepository<Mess,Integer>  {
 
-	 @Query("SELECT m FROM Mess m WHERE LOWER(m.area) LIKE LOWER(:area)")
+	 @Query("SELECT m FROM Mess m WHERE m.area LIKE %:area%")
 	    List<Mess> findByArea(@Param("area") String area);
 	
 	 @Query("select m from Mess m where m.logins = :log ")
 		public Mess getMess(Login log );
-	 
-//	 Optional<Mess> findByMessIdAndDeletedFalse(int mess_id);
+
+	// List<Mess> findByDeletedFalse();
 	 
 
 }
