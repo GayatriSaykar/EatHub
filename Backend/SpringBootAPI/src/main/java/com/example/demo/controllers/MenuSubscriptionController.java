@@ -44,13 +44,13 @@ public class MenuSubscriptionController {
 		return menusubservice.saveMenuSub(mn);
 	}
 	
-//	@GetMapping("/getMenuSubscriptionid")
-//	public List<MenuSubscription> getPerticularmessSub(@RequestParam("mess_subscription_id") int mess_subscription_id) {
-//		
-//	System.out.println(mess_subscription_id);
-//	MessSubscription messsub = msbservice.getMessSubid(mess_subscription_id);
-//	return  menuservice.getPerticularMessBySubid(mess_subscription_id);
-//	}
+	@GetMapping("/getMenuSubscriptionid")
+	public List<MenuSubscription> getPerticularmessSub(@RequestParam("mess_subscription_id") int mess_subscription_id) {
+		
+	System.out.println(mess_subscription_id);
+	MessSubscription messsub = msbservice.getMessSubid(mess_subscription_id);
+	return  menuservice.getPerticularMessBySubid(mess_subscription_id);
+	}
 }
 
 //@GetMapping("/getPerticularMessSubscriptionTwo")

@@ -1,89 +1,117 @@
 import React, { useState } from 'react';
-import LogoutForm from './LogoutForm';
 
 const Payment = () => {
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [startDateError, setStartDateError] = useState('');
-  const [endDateError, setEndDateError] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
+  const [cvv, setCvv] = useState('');
+  const [paymentStatus, setPaymentStatus] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleCardNumberChange = (event) => {
+    setCardNumber(event.target.value);
+    setPaymentStatus('');
+  };
 
-    // Validation
-    if (!startDate) {
-      setStartDateError('Start Date is required');
-      return;
-    } else {
-      setStartDateError('');
-    }
+  const handleExpiryDateChange = (event) => {
+    setExpiryDate(event.target.value);
+    setPaymentStatus('');
+  };
 
-    if (!endDate) {
-      setEndDateError('End Date is required');
-      return;
-    } else {
-      setEndDateError('');
-    }
+  const handleCvvChange = (event) => {
+    setCvv(event.target.value);
+    setPaymentStatus('');
+  };
 
+  const handlePaymentSubmit = async (event) => {
+    event.preventDefault();
 
     try {
-      // Simulate a payment API call
-      // const paymentResponse = await makePayment({ startDate, endDate });
-      // console.log("Payment Response:", paymentResponse);
+      const response = await fetch('YOUR_PAYMENT_API_ENDPOINT', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cardNumber,
+          expiryDate,
+          cvv,
+        }),
+      });
 
-      // Redirect to a confirmation page or show a success message
-      // history.push('/payment-confirmation'); // Example of using React Router
-      console.log("Payment Successful");
+      if (!response.ok) {
+        throw new Error('Failed to submit payment');
+      }
+
+      // Clear form fields upon successful submission
+      setCardNumber('');
+      setExpiryDate('');
+      setCvv('');
+
+      // Set payment status to success
+      setPaymentStatus('success');
     } catch (error) {
-      console.error("Payment Error:", error);
-      // Handle payment failure or display an error message
+      console.error('Error submitting payment:', error.message);
+
+      // Set payment status to failed
+      setPaymentStatus('failed');
+
+      // Handle error as needed
     }
-  };
-
-  const handleStartDateChange = (event) => {
-    setStartDate(event.target.value);
-    setStartDateError('');
-  };
-
-  const handleEndDateChange = (event) => {
-    setEndDate(event.target.value);
-    setEndDateError('');
   };
 
   return (
-    <div className="row">
-      <div className="nav navbar">
-        <LogoutForm />
-      </div>
-      <div className="col-md-6 mx-auto mt-5">
-        <form className="form-control-sm" onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <h2 className="text-center">Payment</h2>
+    <div className="container mt-5">
+      <h2>Simple Payment Form</h2>
+      <form onSubmit={handlePaymentSubmit}>
+        <div className="form-group">
+          <label htmlFor="cardNumber">Card Number</label>
+          <input
+            type="text"
+            id="cardNumber"
+            className="form-control"
+            placeholder="Enter card number"
+            value={cardNumber}
+            onChange={handleCardNumberChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="expiryDate">Expiry Date</label>
+          <input
+            type="text"
+            id="expiryDate"
+            className="form-control"
+            placeholder="MM/YY"
+            value={expiryDate}
+            onChange={handleExpiryDateChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="cvv">CVV</label>
+          <input
+            type="text"
+            id="cvv"
+            className="form-control"
+            placeholder="Enter CVV"
+            value={cvv}
+            onChange={handleCvvChange}
+          />
+        </div>
 
-            <div className="mb-3">
-              <label htmlFor="checkin" className="form-label">
-                Start Date:
-              </label>
-              <input type="date" id="checkin" className={`form-control form-control-sm ${startDateError && 'is-invalid'}`} value={startDate} onChange={handleStartDateChange} />
-              {startDateError && <div className="invalid-feedback">{startDateError}</div>}
-            </div>
+        {paymentStatus === 'success' && (
+          <p className="text-success mt-2" style={{ fontSize: '14px' }}>
+            Payment successful!
+          </p>
+        )}
 
-            <div className="mb-3">
-              <label htmlFor="checkout" className="form-label">
-                End Date:
-              </label>
-              <input type="date" id="checkout" className={`form-control form-control-sm ${endDateError && 'is-invalid'}`} value={endDate} onChange={handleEndDateChange} />
-              {endDateError && <div className="invalid-feedback">{endDateError}</div>}
-            </div>
-          </div>
+        {paymentStatus === 'failed' && (
+          <p className="text-danger mt-2" style={{ fontSize: '14px' }}>
+            Payment failed. Please try again.
+          </p>
+        )}
 
-          <div className="text-center">
-            <button type="submit" className="btn btn-primary" onClick={handleSubmit}>
-              Pay Now
-            </button>
-          </div>
-        </form>
-      </div>
+        <button type="submit" className="btn btn-primary mt-3">
+          Submit Payment
+        </button>
+      </form>
     </div>
   );
 };

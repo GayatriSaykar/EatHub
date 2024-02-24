@@ -24,9 +24,9 @@ public class MenuService {
 		return mtrepo.findById(menu_id).get();
 	}
 
-//	public List<MenuSubscription> getPerticularMessBySubid(int mess_subscription_id) {
-//		// TODO Auto-generated method stub
-//		return mtrepo.findById(mess_subscription_id).get();
-//	}
+	public List<MenuSubscription> getPerticularMessBySubid(int mess_subscription_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
