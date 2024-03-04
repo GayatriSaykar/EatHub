@@ -24,9 +24,17 @@ public class MenuService {
 		return mtrepo.findById(menu_id).get();
 	}
 
-	public List<MenuSubscription> getPerticularMessBySubid(int mess_subscription_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+	
+//	 public List<Menu> getMenuByMessSubscriptionAndMenuId(int messSubscriptionId, int menuId) {
+//	        // You can implement any additional logic if needed
+//	        return mtrepo.findByMessSubscriptionIdAndMenuId(messSubscriptionId, menuId);
+//	    }
+
+//	 public List<Menu> getMenuByMenuIdAndMessSubscriptionId(int menuId, int messSubscriptionId) {
+//	        return mtrepo.findByMenuIdAndMessSubscriptionId(menuId, messSubscriptionId);
+//	    }
+
+	
+	
 }

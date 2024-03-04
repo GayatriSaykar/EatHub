@@ -213,7 +213,7 @@ const reducer = (state, action) => {
                 Name
              </label>
             <div className="mb-3">
-            <input type='text' className="form-control opacity-10" placeholder='Name' id="cust_name" autoComplete="off" name="cust_name" 
+            <input type='text' className="form-control opacity-80" placeholder='Name' id="cust_name" autoComplete="off" name="cust_name" 
                     value={customer.cust_name.value}
                     onChange={(e)=>{handleChange("cust_name",e.target.value)}} 
                     onBlur={(e)=>{handleChange("cust_name",e.target.value)}}

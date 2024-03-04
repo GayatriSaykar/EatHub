@@ -240,7 +240,7 @@ import { useNavigate } from 'react-router-dom';
 const MessHome = () => {
   const navigate = useNavigate();
   const localdata = JSON.parse(localStorage.getItem("loggedinfo"));
-  const messSubscriptionId = localStorage.getItem("messSubId");
+  const messSubscriptionId = localStorage.getItem("messId");
 
   const [subscriptions, setSubscriptions] = useState([]);
   const [mess, setMess] = useState({});
@@ -267,15 +267,14 @@ const MessHome = () => {
       .then(data => setMess(data))
       .catch(error => console.error('Error fetching mess:', error));
   }
-
+// console.log(JSON.stringify(data)
   const showMesses = (e) => {
     e.preventDefault();
     fetch(`http://localhost:8080/getPerticularMessSubscription?messid=${mess.mess_id}&subId=${selectedSubscription}`)
       .then(response => response.json())
-      .then(data => {
-        setOm(data);
-        console.log(JSON.stringify(data));
-      })
+      .then(data => 
+        setOm(data)
+      )
       .catch(error => console.error('Error fetching mess subscriptions:', error));
   }
 

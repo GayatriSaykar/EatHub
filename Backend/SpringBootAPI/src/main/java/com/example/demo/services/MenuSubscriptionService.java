@@ -27,8 +27,10 @@ public class MenuSubscriptionService {
 	{
 		return msbrepo.findById(menuSubid).get();
 	}
+
+	public List<MenuSubscription> getItems(int messSubId, int menuId) {
+		
+		return msbrepo.getItemsMessSubIdMenuId(messSubId,menuId);
+	}
 	
-//	public List<MenuSubscription> getMenuSubscription() {
-//        return msbrepo.getMenuSubscription();
-//    }
 }

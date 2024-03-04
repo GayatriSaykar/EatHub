@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entities.Menu;
@@ -22,4 +23,20 @@ public class MenuController {
 	{
 		return mtservice.getMenu();
 	}
+	
+//	@GetMapping("/mess-subscription/{messSubscriptionId}/menu/{menuId}")
+//    public List<Menu> getMenuByMessSubscriptionAndMenuId(
+//            @PathVariable int messSubscriptionId,
+//            @PathVariable int menuId
+//    ) {
+//        return mtservice.getMenuByMessSubscriptionAndMenuId(messSubscriptionId, menuId);
+//    }
+	
+//	 @GetMapping("/menus/{menuId}/mess-subscription/{messSubscriptionId}")
+//	    public List<Menu> getMenuByMenuIdAndMessSubscriptionId(
+//	            @PathVariable int menuId,
+//	            @PathVariable int messSubscriptionId
+//	    ) {
+//	        return mtservice.getMenuByMenuIdAndMessSubscriptionId(menuId, messSubscriptionId);
+//	    }
 }

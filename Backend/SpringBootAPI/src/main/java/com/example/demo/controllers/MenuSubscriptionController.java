@@ -20,7 +20,7 @@ import com.example.demo.services.MenuSubscriptionService;
 import com.example.demo.services.MessSubscriptionService;
 
 @RestController
-@CrossOrigin(origins = "http//localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000") 
 public class MenuSubscriptionController {
 
 	@Autowired
@@ -44,13 +44,13 @@ public class MenuSubscriptionController {
 		return menusubservice.saveMenuSub(mn);
 	}
 	
-	@GetMapping("/getMenuSubscriptionid")
-	public List<MenuSubscription> getPerticularmessSub(@RequestParam("mess_subscription_id") int mess_subscription_id) {
-		
-	System.out.println(mess_subscription_id);
-	MessSubscription messsub = msbservice.getMessSubid(mess_subscription_id);
-	return  menuservice.getPerticularMessBySubid(mess_subscription_id);
+	@GetMapping("/displayMenuItems")
+	public List<MenuSubscription> displayMenu(@RequestParam("messSubId") int messSubId, @RequestParam("menuId") int menuId ) 
+	{
+		return menusubservice.getItems(messSubId,menuId);
 	}
+	
+	
 }
 
 //@GetMapping("/getPerticularMessSubscriptionTwo")

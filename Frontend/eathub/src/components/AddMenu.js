@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
+import {Link} from 'react-router-dom';
+import LogoutForm from "./LogoutForm";
 
 const AddMenu = () => {
- 
-  const navigate = useNavigate();
-  const messSubscriptionId = localStorage.getItem("messSubId");
+
+
+  const [showMessage, setShowMessage] = useState(false);
+  const messSubscriptionId = localStorage.getItem("messId");
   const [menuData, setMenuData] = useState([]);
   const [selectedMenuItems, setSelectedMenuItems] = useState([]);
   const [quantity, setQuantity] = useState(1);
-
 
   useEffect(() => {
     console.log("mess id" + messSubscriptionId);
     fetch("http://localhost:8080/menus")
       .then((response) => response.json())
-      .then((data) => setMenuData(data))
+      .then((data) => setMenuData(data)
+      )
       .catch((error) => console.error("Error fetching menu data:", error));
   }, []);
 
@@ -58,8 +60,8 @@ const AddMenu = () => {
           return response.json();
         })
         .then((data) => {
-          navigate("/vendor")
           console.log("Menu subscription saved:", data);
+          setShowMessage(true);
         })
         .catch((error) =>
           console.error("Error saving menu subscription:", error)
@@ -68,8 +70,26 @@ const AddMenu = () => {
   };
 
   return (
+    <div><nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <div className="container">
+      <a className="navbar-brand" href="#">MESS </a>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item">
+            <Link className="nav-link" to="#add-plan">Add Plan</Link>
+          </li>
+          <li className="nav-item">
+            <LogoutForm />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
     <div className="container mt-4">
-      {JSON.stringify(menuData)}
+      {/* {JSON.stringify(menuData)} */}
       <h3>Add Menu</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -104,8 +124,9 @@ const AddMenu = () => {
         <button className="btn btn-primary" onClick={(e) => handleSave(e)}>
           Save
         </button>
+        {showMessage && <div className="success-message" style={{color:"green"}}>Added Successfully </div>}
       </form>
-    </div>
+    </div></div>
   );
 };
 

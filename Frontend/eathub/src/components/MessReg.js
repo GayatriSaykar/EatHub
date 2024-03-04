@@ -526,7 +526,7 @@ const reducer=(state,action)=>{
                 Mess Name
              </label>
             <div className="mb-3">
-            <input type='text' className="form-control opacity-50" placeholder='Mess Name' id="firstName" autoComplete="off" name="mess_name" 
+            <input type='text' className="form-control opacity-500" placeholder='Mess Name' id="firstName" autoComplete="off" name="mess_name" 
                     value={mess.mess_name.value}
                     onChange={(e)=>{handleChange("mess_name",e.target.value)}} 
                     onBlur={(e)=>{handleChange("mess_name",e.target.value)}}
@@ -542,7 +542,7 @@ const reducer=(state,action)=>{
                 Owner Name
              </label>
             <div className="mb-3">
-            <input type='text' className="form-control opacity-50" placeholder='Owner Name' id="owner_name" autoComplete="off" name="owner_name" 
+            <input type='text' className="form-control opacity-500" placeholder='Owner Name' id="owner_name" autoComplete="off" name="owner_name" 
                     value={mess.owner_name.value}
                     onChange={(e)=>{handleChange("owner_name",e.target.value)}} 
                     onBlur={(e)=>{handleChange("owner_name",e.target.value)}}
@@ -558,7 +558,7 @@ const reducer=(state,action)=>{
                 Email
              </label>
             <div className="mb3">
-            <input type='text' className="form-control opacity-50" placeholder='Email' id="email" autoComplete="off" name="email" 
+            <input type='text' className="form-control opacity-500" placeholder='Email' id="email" autoComplete="off" name="email" 
                     value={mess.email.value}
                     onChange={(e)=>{handleChange("email",e.target.value)}} 
                     onBlur={(e)=>{handleChange("email",e.target.value)}}
@@ -575,7 +575,7 @@ const reducer=(state,action)=>{
                 Contact
              </label>
             <div className="mb-3">
-            <input type='text' className="form-control opacity-50" placeholder='Contact' id="contactno" autoComplete="off" name="contactno" 
+            <input type='text' className="form-control opacity-500" placeholder='Contact' id="contactno" autoComplete="off" name="contactno" 
                     value={mess.contactno.value}
                     onChange={(e)=>{handleChange("contactno",e.target.value)}} 
                     onBlur={(e)=>{handleChange("contactno",e.target.value)}}
@@ -638,7 +638,7 @@ const reducer=(state,action)=>{
             <label className="form-label" style={{ float: "left" }}>
                 Address
              </label>
-            <input type='text' className="form-control opacity-50" placeholder='Address' id="mess_address" autoComplete="off" name="mess_address" 
+            <input type='text' className="form-control opacity-500" placeholder='Address' id="mess_address" autoComplete="off" name="mess_address" 
                     value={mess.mess_address.value}
                     onChange={(e)=>{handleChange("mess_address",e.target.value)}} 
                     onBlur={(e)=>{handleChange("mess_address",e.target.value)}}
@@ -656,7 +656,7 @@ const reducer=(state,action)=>{
              </label>
             <div className="mb-3">
             
-            <input type='text' className="form-control opacity-50" placeholder='Username' id="username" autoComplete="off" name="username" 
+            <input type='text' className="form-control opacity-500" placeholder='Username' id="username" autoComplete="off" name="username" 
                     value={mess.username.value}
                     onChange={(e)=>{handleChange("username",e.target.value)}} 
                     onBlur={(e)=>{handleChange("username",e.target.value)}}
@@ -674,7 +674,7 @@ const reducer=(state,action)=>{
              </label>
             <div className="mb-3">
             
-            <input type='password' className="form-control opacity-50" placeholder='Password' id="password" autoComplete="off" name="password" 
+            <input type='password' className="form-control opacity-500" placeholder='Password' id="password" autoComplete="off" name="password" 
                     value={mess.password.value}
                     onChange={(e)=>{handleChange("password",e.target.value)}} 
                     onBlur={(e)=>{handleChange("password",e.target.value)}}

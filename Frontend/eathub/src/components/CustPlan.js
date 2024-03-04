@@ -41,14 +41,14 @@ export default function CustPlan() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
-          <a className="navbar-brand" href="#">Customer </a>
+          <a className="navbar-brand" href="/custhome">Customer </a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="#add-plan">Add Plan</Link>
+                <Link className="nav-link" to="#view-plan">View Plan</Link>
               </li>
               <li className="nav-item">
                 <LogoutForm />
@@ -57,7 +57,7 @@ export default function CustPlan() {
           </div>
         </div>
       </nav>
-      {JSON.stringify(om)}
+      {/* {JSON.stringify(om)} */}
       <div className="table-responsive">
         <h3>Customer plan</h3>
         <table className="table">

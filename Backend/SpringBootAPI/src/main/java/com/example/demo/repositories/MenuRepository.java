@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entities.Menu;
+import com.example.demo.entities.MenuSubscription;
 
 import jakarta.transaction.Transactional;
 
@@ -16,4 +17,7 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
 	@Query("select m from Menu m")
 	public List<Menu> getmenu();
+	
+	
+
 }

@@ -95,6 +95,7 @@ const Login = () => {
             console.log(JSON.stringify(obj));
           if(obj.status===false){
             alert("Request has not been approved");
+            
             navigate('/');
           }
           

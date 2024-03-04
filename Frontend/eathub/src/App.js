@@ -13,6 +13,7 @@ import CustPlan from './components/CustPlan';
 import AddMenu from './components/AddMenu';
 
 
+
 function App() {
   return (
     <div className="App">
@@ -26,7 +27,10 @@ function App() {
       < Route path='/admin' element={<Admin/>} ></Route>
       <Route path='/payment' element={<Payment />}></Route>
       <Route path='/custplan/:mess_id' element={<CustPlan />}></Route>
-      <Route path='/addmenu' element={<AddMenu />}></Route>
+      <Route path='/addmenu' element={<AddMenu/>}></Route>
+      
+     
+
       
 
 
